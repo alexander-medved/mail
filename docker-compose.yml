@@ -4,8 +4,8 @@ services:
     image: hardware/mailserver
     container_name: mailserver
     domainname: playtagon.com                # Mail server FQDN & reverse = mail.domain.tld.
-    hostname: mail
-    # restart: always
+    hostname: mail2
+    restart: always
     # extra_hosts:                        - Required for external database (on other server or for local database on host)
     #  - "mariadb:xx.xx.xx.xx"            - Replace with IP address of MariaDB server
     ports:
@@ -18,7 +18,7 @@ services:
       - "995:995"   # POP3S      SSL/TLS  - Optional - For webmails/desktop clients
       - "4190:4190" # SIEVE      STARTTLS - Optional - Recommended for mail filtering
     environment:
-      - DBPASS=xxxxxxx
+      - DBPASS=AWf2435W2
     # - ENABLE_POP3=true          # Enable POP3 protocol
     # - GREYLISTING=gross         # Enable gross greylisting policy server
     # - DISABLE_CLAMAV=true       # Disable virus scanning
@@ -39,10 +39,10 @@ services:
     image: hardware/postfixadmin
     container_name: postfixadmin
     domainname: playtagon.com
-    hostname: mail
+    hostname: mail2
     restart: always
     environment:
-      - DBPASS=xxxxxxx
+      - DBPASS=AWf2435W2
     depends_on:
       - mailserver
       - mariadb
@@ -65,17 +65,17 @@ services:
   # https://github.com/hardware/nsd-dnssec
   # https://www.nlnetlabs.nl/projects/nsd/
   # Configuration : https://github.com/hardware/mailserver/wiki/NSD-initial-configuration
-  nsd:
-    image: hardware/nsd-dnssec
-    container_name: nsd
+  #nsd:
+  #  image: hardware/nsd-dnssec
+  #  container_name: nsd
     # restart: always
-    ports:
-      - "53:53"
-      - "53:53/udp"
-    volumes:
-      - /mnt/docker/nsd/conf:/etc/nsd
-      - /mnt/docker/nsd/zones:/zones
-      - /mnt/docker/nsd/db:/var/db/nsd
+  #  ports:
+  #    - "53:53"
+  #    - "53:53/udp"
+  #  volumes:
+  #    - /mnt/docker/nsd/conf:/etc/nsd
+  #    - /mnt/docker/nsd/zones:/zones
+  #    - /mnt/docker/nsd/db:/var/db/nsd
 
   # Web server
   # https://github.com/Wonderfall/dockerfiles/tree/master/nginx
@@ -84,7 +84,7 @@ services:
   nginx:
     image: wonderfall/boring-nginx
     container_name: nginx
-    # restart: always
+    restart: always
     ports:
       - "80:8000"
       - "443:4430"
@@ -103,12 +103,12 @@ services:
   mariadb:
     image: mariadb:10.1
     container_name: mariadb
-    # restart: always
+    restart: always
     # Info : These variables are ignored when the volume already exists (databases created before).
     environment:
-      - MYSQL_ROOT_PASSWORD=xxxxxxx
+      - MYSQL_ROOT_PASSWORD=rootAWf2435W
       - MYSQL_DATABASE=postfix
       - MYSQL_USER=postfix
-      - MYSQL_PASSWORD=xxxxxxx
+      - MYSQL_PASSWORD=AWf2435W2
     volumes:
       - /mnt/docker/mysql/db:/var/lib/mysql
