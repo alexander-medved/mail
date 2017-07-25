@@ -1,4 +1,0 @@
-root         postmaster@{{ DOMAIN }}
-amavis       postmaster@{{ DOMAIN }}
-clamav       postmaster@{{ DOMAIN }}
-postmaster   postmaster@{{ DOMAIN }}
