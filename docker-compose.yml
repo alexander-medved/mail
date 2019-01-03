@@ -18,7 +18,7 @@ services:
       - "995:995"   # POP3S      SSL/TLS  - Optional - For webmails/desktop clients
       - "4190:4190" # SIEVE      STARTTLS - Optional - Recommended for mail filtering
     environment:
-      - DBPASS=AWf2435W2
+      - DBPASS=TheStrongestPass
     # - ENABLE_POP3=true          # Enable POP3 protocol
     # - GREYLISTING=gross         # Enable gross greylisting policy server
     # - DISABLE_CLAMAV=true       # Disable virus scanning
@@ -43,7 +43,7 @@ services:
     hostname: mail2
     restart: always
     environment:
-      - DBPASS=AWf2435W2
+      - DBPASS=TheStrongestPass
     depends_on:
       - mailserver
       - mariadb
@@ -110,9 +110,9 @@ services:
     restart: always
     # Info : These variables are ignored when the volume already exists (databases created before).
     environment:
-      - MYSQL_ROOT_PASSWORD=rootAWf2435W
+      - MYSQL_ROOT_PASSWORD=rootTheStrongestPass
       - MYSQL_DATABASE=postfix
       - MYSQL_USER=postfix
-      - MYSQL_PASSWORD=AWf2435W2
+      - MYSQL_PASSWORD=TheStrongestPass
     volumes:
       - /mnt/docker/mysql/db:/var/lib/mysql
